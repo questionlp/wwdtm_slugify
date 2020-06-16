@@ -31,7 +31,6 @@ def slugify_locations(database_connection: mysql.connector.connect):
             else:
                 location_slug = slugify("locationid-{}".format(location_id))
 
-            print(location_slug)
             query = ("UPDATE ww_locations SET locationslug = %s "
                      "WHERE locationid = %s;")
             cursor.execute(query, (location_slug, location_id,))
