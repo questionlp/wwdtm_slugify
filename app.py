@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2018-2019 Linh Pham
+# Copyright (c) 2018-2020 Linh Pham
 # wwdtm-slugify is relased under the terms of the Apache License 2.0
 """Scan through Wait Wait Stats Page database and generate slugs for
-guest, host, panelist and scorekeeper entries without corresponding
-slug strings"""
+guest, host, location, panelist and scorekeeper entries without
+corresponding slug strings"""
 
 import json
 import mysql.connector
-from wwdtm import guests, hosts, panelists, scorekeepers
+from wwdtm import guests, hosts, locations, panelists, scorekeepers
 
 #region Bootstrap Functions
 def load_config():
@@ -28,6 +28,7 @@ def main():
 
     guests.slugify_guests(database_connection)
     hosts.slugify_hosts(database_connection)
+    locations.slugify_locations(database_connection)
     panelists.slugify_panelists(database_connection)
     scorekeepers.slugify_scorekeepers(database_connection)
 
