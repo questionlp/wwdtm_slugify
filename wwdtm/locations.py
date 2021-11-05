@@ -27,7 +27,9 @@ def slugify_locations(database_connection: mysql.connector.connect):
             elif id and venue and (not city and not state):
                 location_slug = slugify("{} {}".format(location_id, venue))
             elif id and city and state and not venue:
-                location_slug = slugify("{} {} {}".format(id, city, state))
+                location_slug = slugify("{} {} {}".format(location_id,
+                                                          city,
+                                                          state))
             elif id:
                 location_slug = "location-{}".format(location_id)
 
