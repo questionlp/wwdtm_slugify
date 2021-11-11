@@ -22,14 +22,16 @@ def slugify_locations(database_connection: mysql.connector.connect):
             state = row["state"]
             if venue and city and state:
                 location_slug = slugify("{} {} {}".format(venue, city, state))
-            elif venue and (not city and not state):
-                location_slug = slugify(venue)
-            elif city and state and not venue:
-                location_slug = slugify("{} {}".format(city, state))
-            elif city:
-                location_slug = slugify(city)
-            else:
-                location_slug = slugify("locationid-{}".format(location_id))
+            elif venue and city and not state:
+                location_slug = slugify("{} {}".format(venue, city))
+            elif id and venue and (not city and not state):
+                location_slug = slugify("{} {}".format(location_id, venue))
+            elif id and city and state and not venue:
+                location_slug = slugify("{} {} {}".format(location_id,
+                                                          city,
+                                                          state))
+            elif id:
+                location_slug = "location-{}".format(location_id)
 
             query = ("UPDATE ww_locations SET locationslug = %s "
                      "WHERE locationid = %s;")
