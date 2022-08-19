@@ -6,11 +6,14 @@
 import mysql.connector
 from slugify import slugify
 
+
 def slugify_hosts(database_connection: mysql.connector.connect):
     cursor = database_connection.cursor(dictionary=True)
-    query = ("SELECT hostid, host from ww_hosts "
-             "WHERE hostslug IS NULL "
-             "OR TRIM(hostslug) = '';")
+    query = (
+        "SELECT hostid, host from ww_hosts "
+        "WHERE hostslug IS NULL "
+        "OR TRIM(hostslug) = '';"
+    )
     cursor.execute(query)
     result = cursor.fetchall()
 
@@ -19,8 +22,13 @@ def slugify_hosts(database_connection: mysql.connector.connect):
             host_id = row["hostid"]
             host = row["host"]
             host_slug = slugify(host)
-            query = ("UPDATE ww_hosts SET hostslug = %s "
-                     "WHERE hostid = %s;")
-            cursor.execute(query, (host_slug, host_id,))
+            query = "UPDATE ww_hosts SET hostslug = %s " "WHERE hostid = %s;"
+            cursor.execute(
+                query,
+                (
+                    host_slug,
+                    host_id,
+                ),
+            )
 
     cursor.close()

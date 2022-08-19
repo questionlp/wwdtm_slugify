@@ -6,10 +6,12 @@ guest, host, location, panelist and scorekeeper entries without
 corresponding slug strings"""
 
 import json
+
 import mysql.connector
+
 from wwdtm import guests, hosts, locations, panelists, scorekeepers
 
-#region Bootstrap Functions
+
 def load_config():
     """Load configuration settings from config.json"""
     with open("config.json", "r") as config_file:
@@ -17,9 +19,7 @@ def load_config():
 
     return config_dict
 
-#endregion
 
-#region Application Initialization
 def main():
     """Generate slugs"""
     config = load_config()
@@ -32,7 +32,6 @@ def main():
     panelists.slugify_panelists(database_connection)
     scorekeepers.slugify_scorekeepers(database_connection)
 
+
 if __name__ == "__main__":
     main()
-
-#endregion
