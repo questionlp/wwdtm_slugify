@@ -7,11 +7,14 @@ Database"""
 import mysql.connector
 from slugify import slugify
 
+
 def slugify_scorekeepers(database_connection: mysql.connector.connect):
     cursor = database_connection.cursor(dictionary=True)
-    query = ("SELECT scorekeeperid, scorekeeper from ww_scorekeepers "
-             "WHERE scorekeeperslug IS NULL "
-             "OR TRIM(scorekeeperslug) = '';")
+    query = (
+        "SELECT scorekeeperid, scorekeeper from ww_scorekeepers "
+        "WHERE scorekeeperslug IS NULL "
+        "OR TRIM(scorekeeperslug) = '';"
+    )
     cursor.execute(query)
     result = cursor.fetchall()
 
@@ -20,8 +23,16 @@ def slugify_scorekeepers(database_connection: mysql.connector.connect):
             scorekeeper_id = row["scorekeeperid"]
             scorekeeper = row["scorekeeper"]
             scorekeeper_slug = slugify(scorekeeper)
-            query = ("UPDATE ww_scorekeepers SET scorekeeperslug = %s "
-                     "WHERE scorekeeperid = %s;")
-            cursor.execute(query, (scorekeeper_slug, scorekeeper_id,))
+            query = (
+                "UPDATE ww_scorekeepers SET scorekeeperslug = %s "
+                "WHERE scorekeeperid = %s;"
+            )
+            cursor.execute(
+                query,
+                (
+                    scorekeeper_slug,
+                    scorekeeper_id,
+                ),
+            )
 
     cursor.close()

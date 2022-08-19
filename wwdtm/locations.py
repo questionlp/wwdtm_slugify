@@ -6,11 +6,14 @@
 import mysql.connector
 from slugify import slugify
 
+
 def slugify_locations(database_connection: mysql.connector.connect):
     cursor = database_connection.cursor(dictionary=True)
-    query = ("SELECT locationid, venue, city, state from ww_locations "
-             "WHERE locationslug IS NULL "
-             "OR TRIM(locationslug) = '';")
+    query = (
+        "SELECT locationid, venue, city, state from ww_locations "
+        "WHERE locationslug IS NULL "
+        "OR TRIM(locationslug) = '';"
+    )
     cursor.execute(query)
     result = cursor.fetchall()
 
@@ -27,14 +30,19 @@ def slugify_locations(database_connection: mysql.connector.connect):
             elif id and venue and (not city and not state):
                 location_slug = slugify("{} {}".format(location_id, venue))
             elif id and city and state and not venue:
-                location_slug = slugify("{} {} {}".format(location_id,
-                                                          city,
-                                                          state))
+                location_slug = slugify("{} {} {}".format(location_id, city, state))
             elif id:
                 location_slug = "location-{}".format(location_id)
 
-            query = ("UPDATE ww_locations SET locationslug = %s "
-                     "WHERE locationid = %s;")
-            cursor.execute(query, (location_slug, location_id,))
+            query = (
+                "UPDATE ww_locations SET locationslug = %s " "WHERE locationid = %s;"
+            )
+            cursor.execute(
+                query,
+                (
+                    location_slug,
+                    location_id,
+                ),
+            )
 
     cursor.close()
