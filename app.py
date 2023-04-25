@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2018-2020 Linh Pham
-# wwdtm-slugify is relased under the terms of the Apache License 2.0
+# Copyright (c) 2018-2023 Linh Pham
+# wwdtm-slugify is released under the terms of the Apache License 2.0
 """Scan through Wait Wait Stats Page database and generate slugs for
 guest, host, location, panelist and scorekeeper entries without
 corresponding slug strings"""
