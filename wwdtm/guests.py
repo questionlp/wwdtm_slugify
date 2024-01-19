@@ -1,13 +1,18 @@
-# -*- coding: utf-8 -*-
-# Copyright (c) 2018-2023 Linh Pham
+# Copyright (c) 2018-2024 Linh Pham
 # wwdtm-slugify is released under the terms of the Apache License 2.0
-"""Generate slugs for guest records in the Wait Wait Stats Database"""
+# SPDX-License-Identifier: Apache-2.0
+#
+# vim: set noai syntax=python ts=4 sw=4:
+"""Guest Slug Generator."""
 
-import mysql.connector
+from mysql.connector.connection import MySQLConnection
+from mysql.connector.pooling import PooledMySQLConnection
 from slugify import slugify
 
 
-def slugify_guests(database_connection: mysql.connector.connect):
+def slugify_guests(
+    database_connection: MySQLConnection | PooledMySQLConnection,
+) -> None:
     cursor = database_connection.cursor(dictionary=True)
     query = (
         "SELECT guestid, guest from ww_guests "
@@ -22,7 +27,7 @@ def slugify_guests(database_connection: mysql.connector.connect):
             guest_id = row["guestid"]
             guest = row["guest"]
             guest_slug = slugify(guest)
-            query = "UPDATE ww_guests SET guestslug = %s " "WHERE guestid = %s;"
+            query = "UPDATE ww_guests SET guestslug = %s WHERE guestid = %s;"
             cursor.execute(
                 query,
                 (

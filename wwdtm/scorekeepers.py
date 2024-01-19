@@ -1,14 +1,18 @@
-# -*- coding: utf-8 -*-
-# Copyright (c) 2018-2023 Linh Pham
+# Copyright (c) 2018-2024 Linh Pham
 # wwdtm-slugify is released under the terms of the Apache License 2.0
-"""Generate slugs for scorekeeper records in the Wait Wait Stats
-Database"""
+# SPDX-License-Identifier: Apache-2.0
+#
+# vim: set noai syntax=python ts=4 sw=4:
+"""Scorekeeper Slug Generator."""
 
-import mysql.connector
+from mysql.connector.connection import MySQLConnection
+from mysql.connector.pooling import PooledMySQLConnection
 from slugify import slugify
 
 
-def slugify_scorekeepers(database_connection: mysql.connector.connect):
+def slugify_scorekeepers(
+    database_connection: MySQLConnection | PooledMySQLConnection,
+) -> None:
     cursor = database_connection.cursor(dictionary=True)
     query = (
         "SELECT scorekeeperid, scorekeeper from ww_scorekeepers "

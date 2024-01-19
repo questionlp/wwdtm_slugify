@@ -2,7 +2,7 @@
 
 ## Overview
 
-Python script that scans through the guest, host, panelist and scorekeeper tables in an instance of the [Wait Wait... Don't Tell Me! Stats Page](http://wwdt.me) database and generates slug strings for any of those that are missing.
+Python script that scans through the guest, host, panelist and scorekeeper tables in an instance of the [Wait Wait... Don't Tell Me! Stats Page](http://stats.wwdt.me/) database and generates slug strings for any of those that are missing.
 
 ## Requirements
 
@@ -12,5 +12,3 @@ Python script that scans through the guest, host, panelist and scorekeeper table
 ## License
 
 This library is licensed under the terms of the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-Original version of the Apache License 2.0 can also be found at: <http://www.apache.org/licenses/LICENSE-2.0>.

@@ -1,13 +1,18 @@
-# -*- coding: utf-8 -*-
-# Copyright (c) 2018-2023 Linh Pham
+# Copyright (c) 2018-2024 Linh Pham
 # wwdtm-slugify is released under the terms of the Apache License 2.0
-"""Generate slugs for panelist records in the Wait Wait Stats Database"""
+# SPDX-License-Identifier: Apache-2.0
+#
+# vim: set noai syntax=python ts=4 sw=4:
+"""Panelist Slug Generator."""
 
-import mysql.connector
+from mysql.connector.connection import MySQLConnection
+from mysql.connector.pooling import PooledMySQLConnection
 from slugify import slugify
 
 
-def slugify_panelists(database_connection: mysql.connector.connect):
+def slugify_panelists(
+    database_connection: MySQLConnection | PooledMySQLConnection,
+) -> None:
     cursor = database_connection.cursor(dictionary=True)
     query = (
         "SELECT panelistid, panelist from ww_panelists "
@@ -22,9 +27,7 @@ def slugify_panelists(database_connection: mysql.connector.connect):
             panelist_id = row["panelistid"]
             panelist = row["panelist"]
             panelist_slug = slugify(panelist)
-            query = (
-                "UPDATE ww_panelists SET panelistslug = %s " "WHERE panelistid = %s;"
-            )
+            query = "UPDATE ww_panelists SET panelistslug = %s WHERE panelistid = %s;"
             cursor.execute(
                 query,
                 (
