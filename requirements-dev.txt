@@ -1,6 +1,6 @@
-ruff==0.1.13
-black==24.3.0
-pytest==7.4.4
+ruff==0.5.1
+black==24.4.2
+pytest==8.1.2
 
 mysql-connector-python==8.2.0
 python-slugify==8.0.1
