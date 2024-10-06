@@ -14,7 +14,7 @@ def scorekeeper_slugs(
     database_connection: MySQLConnection | PooledMySQLConnection,
 ) -> list[str]:
     """Retrieve a list of existing scorekeeper slugs."""
-    cursor = database_connection.cursor(named_tuple=True)
+    cursor = database_connection.cursor(dictionary=True)
     query = """
         SELECT scorekeeperslug FROM ww_scorekeepers
         WHERE scorekeeperslug IS NOT NULL
@@ -26,7 +26,7 @@ def scorekeeper_slugs(
 
     slugs = []
     for row in results:
-        slugs.append(row.scorekeeperslug)
+        slugs.append(row["scorekeeperslug"])
 
     return slugs
 

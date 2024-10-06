@@ -14,7 +14,7 @@ def location_slugs(
     database_connection: MySQLConnection | PooledMySQLConnection,
 ) -> list[str]:
     """Retrieve a list of existing location slugs."""
-    cursor = database_connection.cursor(named_tuple=True)
+    cursor = database_connection.cursor(dictionary=True)
     query = """
         SELECT locationslug FROM ww_locations
         WHERE locationslug IS NOT NULL
@@ -26,7 +26,7 @@ def location_slugs(
 
     slugs = []
     for row in results:
-        slugs.append(row.locationslug)
+        slugs.append(row["locationslug"])
 
     return slugs
 

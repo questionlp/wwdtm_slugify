@@ -1,2 +1,2 @@
-mysql-connector-python==8.2.0
-python-slugify==8.0.1
+mysql-connector-python==8.4.0
+python-slugify==8.0.4

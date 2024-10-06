@@ -14,7 +14,7 @@ def host_slugs(
     database_connection: MySQLConnection | PooledMySQLConnection,
 ) -> list[str]:
     """Retrieve a list of existing host slugs."""
-    cursor = database_connection.cursor(named_tuple=True)
+    cursor = database_connection.cursor(dictionary=True)
     query = """
         SELECT hostslug FROM ww_hosts
         WHERE hostslug IS NOT NULL
@@ -26,7 +26,7 @@ def host_slugs(
 
     slugs = []
     for row in results:
-        slugs.append(row.hostslug)
+        slugs.append(row["hostslug"])
 
     return slugs
 

@@ -14,7 +14,7 @@ def panelist_slugs(
     database_connection: MySQLConnection | PooledMySQLConnection,
 ) -> list[str]:
     """Retrieve a list of existing panelist slugs."""
-    cursor = database_connection.cursor(named_tuple=True)
+    cursor = database_connection.cursor(dictionary=True)
     query = """
         SELECT panelistslug FROM ww_panelists
         WHERE panelistslug IS NOT NULL
@@ -26,7 +26,7 @@ def panelist_slugs(
 
     slugs = []
     for row in results:
-        slugs.append(row.panelistslug)
+        slugs.append(row["panelistslug"])
 
     return slugs
 

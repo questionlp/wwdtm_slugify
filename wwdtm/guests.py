@@ -14,7 +14,7 @@ def guest_slugs(
     database_connection: MySQLConnection | PooledMySQLConnection,
 ) -> list[str]:
     """Retrieve a list of existing Not My Job guest slugs."""
-    cursor = database_connection.cursor(named_tuple=True)
+    cursor = database_connection.cursor(dictionary=True)
     query = """
         SELECT guestslug FROM ww_guests
         WHERE guestslug IS NOT NULL
@@ -26,7 +26,7 @@ def guest_slugs(
 
     slugs = []
     for row in results:
-        slugs.append(row.guestslug)
+        slugs.append(row["guestslug"])
 
     return slugs
 
