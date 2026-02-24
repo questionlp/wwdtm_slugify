@@ -1,6 +1,6 @@
-ruff==0.13.3
-pytest==8.4.1
-pytest-cov==6.2.1
+ruff==0.14.14
+pytest==9.0.2
+pytest-cov==7.0.0
 
-mysql-connector-python==9.4.0
+mysql-connector-python==9.5.0
 python-slugify==8.0.4
