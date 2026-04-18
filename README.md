@@ -1,5 +1,7 @@
 # Wait Wait Don't Tell Me! Stats Database Slugify
 
+**Note:** The authoritative version of this repository now resides on Codeberg as [wwdtm_slugify](https://codeberg.org/qlp/wwdtm_slugify) and mirrors changes to GitHub. Going forward, issues and pull requests should be created on Codeberg rather than GitHub.
+
 ## Overview
 
 Python script that scans through the guest, host, panelist and scorekeeper tables in an instance of the [Wait Wait... Don't Tell Me! Stats Page](http://stats.wwdt.me/) database and generates slug strings for any of those that are missing.
